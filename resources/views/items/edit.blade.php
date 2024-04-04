@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="border border-white text-center py-6">
-    <form action="{{ route('items.update', $items->id) }}" method="post">
+    <form action="{{ route('items.update', $items->id) }}" method="post" enctype = "multipart/form-data">
         <h1 class="mb-4 text-2xl text-orange-400">Change the item</h1>
 
         @csrf
@@ -12,6 +12,15 @@
             <label class="text-xl">Name</label>
             <input type="text" value="{{ $items->name }}" name="name" class="w-2/4 ml-4 p-2 text-black rounded-lg">
             
+        </div>
+
+        <div class="w-full mb-4">
+            <label class="text-xl">Image</label>
+            <input type="file" name="image" placeholder="Enter a item image" class="bg-gray-50  w-2/4 ml-4 p-2 text-black rounded-lg">
+        </div>
+
+        <div class="my-4">
+            <img src="{{ asset('images/items/'.$items->image) }}" alt="" class="h-auto w-1/3 mx-auto">
         </div>
 
         <div class="w-full mb-4">

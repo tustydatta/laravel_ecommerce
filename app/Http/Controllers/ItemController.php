@@ -29,9 +29,16 @@ class ItemController extends Controller
         $request->validate([
             'name' => 'required',
             'price' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        
-        Item::create($request->all());
+        $item_data = $request->all();
+       
+        $imageName = time().'.'.$request->image->extension();
+        $item_data['image'] = $imageName; 
+       
+        $request->image->move(public_path('images/items'), $imageName);
+
+        Item::create($item_data);
         return redirect()->route('items.index')
                     ->with('success', 'Items now added');
     }
@@ -60,8 +67,25 @@ class ItemController extends Controller
             'price' => 'required',
         ]);
 
-        $items = Item::find($id);
-        $items->update($request->all());
+        if ($request->file('image')) 
+        {
+            //if image given on file
+            $request->validate([
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            echo "image found";
+            exit();
+        } else 
+        {
+            echo "image not found";
+            exit();
+
+            //if image not provide
+            // $items = Item::find($id);
+            // $items->update($request->all());
+        }
+
         return redirect()->route('items.index')
                 ->with('success', 'Items update');
     }

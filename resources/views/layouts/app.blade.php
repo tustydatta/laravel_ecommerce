@@ -11,8 +11,9 @@
 <body class="">
 <div class="bg-black text-white">
 	<nav class="container mx-auto text-center flex flex-row justify-between md:h-24 ">
+	<a href="http://127.0.0.1:8000">	
 		<img src="{{ URL::to('/') }}/images/logo.png" class="h-16 w-24 md:mt-4 m-14">
-		
+	</a>
 		@guest
 		<h1 class="mt-4 mr-4 text-5xl">Rokomari</h1>
 		
@@ -66,7 +67,7 @@
 				</div>
 				<div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-4">
 					<div class="sm:gap-8">
-						<h2 class="mb-6 text-sm font-semibold uppercase">CONTACT US</h2>
+						<h2 class="mb-6 text-sm font-semibold uppercase text-orange-400">CONTACT US</h2>
 						<ul class="text-gray-400 font-medium">
 							<li class="mb-4">
 								<a href="#" class="hover:underline">Phone: 01864-903688</a>
@@ -78,7 +79,7 @@
 					</div>	
 
 					<div>
-						<h2 class="mb-6 text-sm font-semibold uppercase">Resources</h2>
+						<h2 class="mb-6 text-sm font-semibold uppercase text-orange-400">Resources</h2>
 						<ul class="text-gray-400 font-medium">
 							<li class="mb-4">
 								<a href="#" class="hover:underline">Rokomari</a>
@@ -89,7 +90,7 @@
 						</ul>
 					</div>
 					<div>
-						<h2 class="mb-6 text-sm font-semibold uppercase">Follow us</h2>
+						<h2 class="mb-6 text-sm font-semibold uppercase text-orange-400">Follow us</h2>
 						<ul class="text-gray-400 font-medium">
 							<li class="mb-4">
 								<a href="#" class="hover:underline">GitHub</a>
@@ -100,7 +101,7 @@
 						</ul>
 					</div>
 					<div>
-						<h2 class="mb-6 text-sm font-semibold uppercase">Legal</h2>
+						<h2 class="mb-6 text-sm font-semibold uppercase text-orange-400">Legal</h2>
 						<ul class="text-gray-400 font-medium">
 							<li class="mb-4">
 								<a href="#" class="hover:underline">Privacy Policy</a>

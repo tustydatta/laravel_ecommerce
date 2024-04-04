@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="border border-white text-center py-6">
-    <form action="{{ route('items.store') }}" method="post">
+    <form action="{{ route('items.store') }}" method="post" enctype="multipart/form-data">
         <h1 class="mb-4 text-2xl text-orange-400">Create a new item</h1>
         @csrf
         <div class="w-full mb-4">
@@ -14,9 +14,17 @@
         </div>
 
         <div class="w-full mb-4">
+            <label class="text-xl">Image</label>
+            <input type="file" name="image" placeholder="Enter a item image" class="bg-gray-50  w-2/4 ml-4 p-2 text-black rounded-lg">
+            @error('image')
+                    <div class="">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="w-full mb-4">
             <label class="text-xl">Price</label>
             <input type="number" name="price" placeholder="Enter the item price" class="w-2/4 ml-5 p-2 text-black rounded-lg">
-            @error('name')
+            @error('price')
                     <div class="">{{ $message }}</div>
             @enderror
         </div>
