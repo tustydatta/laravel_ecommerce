@@ -9,9 +9,14 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginRegisterController extends Controller
 {
+    public function adminLogin()
+    {
+        return view('backend.admin_login');
+    }
+
     public function register()
     {
-        return view('auth.register');
+        return view('frontend.auth.register');
     }
 
     public function store(Request $request)
@@ -51,7 +56,7 @@ class LoginRegisterController extends Controller
 
     public function login()
     {
-        return view('auth.login');
+        return view('frontend.auth.login');
     }
 
     public function authenticate(Request $request)
@@ -65,8 +70,18 @@ class LoginRegisterController extends Controller
         if(Auth::attempt($credentials))
         {
             $request->session()->regenerate();
-            return redirect()->route('items.index')
-                        ->withSuccess('You have successfully logged in!');
+
+            $logged_user = User::find(Auth::id());
+
+            $request->session()->put('is_admin', $logged_user->is_admin);
+
+            if ($logged_user->is_admin == 1) {
+                // for admin
+                return redirect()->route('admin.dashboard');
+            } else {
+                // for user
+                return redirect()->route('home');
+            }
         }
         return back()->withErrors(['email' => 'You provided credentials do not match in our records.',])->onlyInput('email');
     }

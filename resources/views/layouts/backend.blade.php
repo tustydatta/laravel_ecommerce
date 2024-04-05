@@ -15,48 +15,22 @@
 <body class="">
 <div class="bg-black text-white">
 	<nav class="container mx-auto text-center flex flex-row justify-between md:h-24 ">
-	<a href="http://127.0.0.1:8000">	
-		<img src="{{ URL::to('/') }}/images/logo.png" class="h-16 w-24 md:mt-4 m-14">
-	</a>
-		@guest
+		<a href="http://127.0.0.1:8000">	
+			<img src="{{ URL::to('/') }}/images/logo.png" class="h-16 w-24 md:mt-4 m-14">
+		</a>
 		<h1 class="mt-4 mr-4 text-5xl">Rokomari</h1>
-		
-		@else
-		<ul class="md:flex md:flex-row mt-8 mr-4 text-xl">
-			<li><a href="#" class="mx-8">Home</a></li>
-			<li><a href="#" class="mx-8">About</a></li>
-			<li><a href="#" class="mx-8">Features</a></li>
-			<li><a href="#" class="mx-8">Contact</a></li>
-		</ul>
-    	@endguest
-		
-		<div class="mt-8">
-            @guest
-			<a href="{{ route('login') }}" class="bg-sky-700 text-white p-3 border border-sky-800 rounded-lg">Login</a>
-			<a href="{{ route('register') }}" class="bg-green-700 text-white p-3 border border-green-800 rounded-lg">Register</a>
-            @else
-			<form action="{{ route('logout') }}" method="POST">
-				@csrf
-				<input type="submit" value="Logout" class="bg-red-700 text-white p-3 border border-red-800 rounded-lg">
-			</form>
-            @endguest
-		</div>
+
+		<form action="{{ route('logout') }}" method="POST">
+			@csrf
+			<input type="submit" value="Logout" class="bg-red-700 text-white p-3 border border-red-800 rounded-lg">
+		</form>
 	</nav>
-	@guest
+
+
 		<div class="min-h-screen bg-[url({{ asset('images/grocery1.jpg')}})] bg-center bg-cover bg-slate-700/75 bg-blend-darken">
-	@else
-		<div class="min-h-screen bg-[url({{ asset('images/grocery.png')}})] bg-center bg-cover bg-slate-700/75 bg-blend-darken">
-	@endguest
+
 		<div class="backdrop-blur-sm px-14">
-
-			@guest
-			<h1 class="text-2xl pt-10 leading-tight">Firstly, You must login and register to access the website!</h1>
-			@else
-			<h1 class="text-6xl pt-10 leading-tight text-orange-400">Items List</h1>
-	 		<p class="text-xl leading-10 text-justify mt-8">Grocify offer a wide range of products, including fresh products, meats, dairy,  meats, dairy, baked goods and non-perishable items.</p>
-			@endguest
-
-             <div class="my-6">
+            <div class="my-6">
                 @yield('content')
             </div>
 	 	</div>

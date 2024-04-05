@@ -3,6 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\LoginRegisterController;
+use App\Http\Controllers\backend\DashboardController;
+use App\Http\Controllers\frontend\WelcomeController;
+
+Route::controller(WelcomeController::class)->group(function(){
+    Route::get('/home', 'home')->name('home');
+});
+
+Route::controller(DashboardController::class)->group(function(){
+    Route::get('/admin/dashboard', 'dashboard')->name('admin.dashboard');
+});
 
 Route::get('/items/index', ItemController::class . '@index')->name('items.index');
 Route::get('/items/create', ItemController::class . '@create')->name('items.create');
@@ -12,6 +22,8 @@ Route::put('/items/{item}', ItemController::class . '@update')->name('items.upda
 Route::delete('/items/{item}', ItemController::class . '@destroy')->name('items.destroy');
 
 Route::controller(LoginRegisterController::class)->group(function(){
+    Route::get('/backend', 'adminLogin')->name('admin_login');
+
     Route::get('/', 'register')->name('register');
     Route::post('/store', 'store')->name('store');
     Route::get('/dashboard', 'dashboard')->name('dashboard');
