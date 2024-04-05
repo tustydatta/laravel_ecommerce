@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File; 
 use App\Models\Item;
 
 class ItemController extends Controller
@@ -62,10 +63,14 @@ class ItemController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $items = Item::find($id);
+
         $request->validate([
             'name' => 'required',
             'price' => 'required',
         ]);
+
+        $item_data = $request->all();
 
         if ($request->file('image')) 
         {
@@ -74,17 +79,17 @@ class ItemController extends Controller
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
 
-            echo "image found";
-            exit();
-        } else 
-        {
-            echo "image not found";
-            exit();
-
-            //if image not provide
-            // $items = Item::find($id);
-            // $items->update($request->all());
+            // old image delete
+            File::delete('images/items/'.$items->image);
+            
+            $imageName = time().'.'.$request->image->extension();
+            $item_data['image'] = $imageName; 
+            
+            //new image upload
+            $request->image->move(public_path('images/items'), $imageName);
         }
+
+        $items->update($item_data);
 
         return redirect()->route('items.index')
                 ->with('success', 'Items update');
@@ -96,6 +101,7 @@ class ItemController extends Controller
     public function destroy(string $id)
     {
         $items = Item::find($id);
+        File::delete('images/items/'.$items->image);
         $items->delete();
         return redirect()->route('items.index')
                     ->with('success', 'Item delete');

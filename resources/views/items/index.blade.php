@@ -1,6 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+
+    @if(session('success'))
+    <div x-data="{ open: true }">
+        <div class="w-ful bg-green-400 px-6 py-5 flex flex-row justify-between" 
+        x-show="open">
+            <p>{{ session('success') }}</p>
+            <i class="fa fa-close text-lg" x-on:click="open =! open"></i>
+        </div>
+    </div>
+    @endif
+
     <div>
         <div class="m-4 float-right">
             <a href="{{ route('items.create') }}" class="bg-green-700 text-white p-3 border border-green-800 rounded-lg">Add</a>
