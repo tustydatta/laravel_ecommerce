@@ -16,22 +16,22 @@
 
 </head>
 
-<body>
-    <div class="border border-lg border-gray-700 text-center py-6">
-        <h3 class="mb-4 text-4xl text-orange-400">Login</h3>
-        <form action="{{ route('authenticate') }}" method="post">
+<body class=" bg-slate-800">
+    <div class="text-center py-6 mx-auto my-16">
+        <h3 class="mb-4 text-4xl text-orange-400 mb-6">Admin Login</h3>
+        <form action="{{ route('admin_authenticate') }}" method="post" class=" w-4/5 mx-auto py-8 bg-slate-500">
             @csrf
             <div class="w-full mb-4">
                 <label for="email" class="text-xl">E-mail</label>
                 <div>
-                    <input type="email" name="email" placeholder="enter your email address" class="w-2/4 ml-4 p-2 rounded-lg text-black">
+                    <input type="email" name="email" placeholder="enter your email address" class="w-2/4 mt-3 ml-4 p-2 rounded-lg text-black">
                 </div>
             </div>
 
             <div class="w-full mb-4">
                 <label for="password" class="text-xl">Password</label>
                 <div>
-                    <input type="password" name="password" placeholder="enter your password" class="w-2/4 ml-4 p-2 rounded-lg text-black">
+                    <input type="password" name="password" placeholder="enter your password" class="w-2/4 mt-3 ml-4 p-2 rounded-lg text-black">
                 </div>
             </div>
 

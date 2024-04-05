@@ -29,24 +29,21 @@
 			<li><a href="#" class="mx-8">Contact</a></li>
 		</ul>
     	@endguest
-		
+
+		<div class="h-14 text-center mt-6 text-xl">
+			<i class="fa-solid fa-cart-shopping"></i>
+			<i class="fa-solid fa-hand-holding-heart"></i>
+		</div>
+
 		<div class="mt-8">
-
-			@if(session('is_admin') == '1')
-				<a href="{{ route('login') }}" class="bg-sky-700 text-white p-3 border border-sky-800 rounded-lg">Login</a>
-				<a href="{{ route('register') }}" class="bg-green-700 text-white p-3 border border-green-800 rounded-lg">Register</a>
-			@endif
-
          @guest
 				<a href="{{ route('login') }}" class="bg-sky-700 text-white p-3 border border-sky-800 rounded-lg">Login</a>
 				<a href="{{ route('register') }}" class="bg-green-700 text-white p-3 border border-green-800 rounded-lg">Register</a>
          @else
-         	@if(session('is_admin') == '0')
-				<form action="{{ route('logout') }}" method="POST">
-					@csrf
-					<input type="submit" value="Logout" class="bg-red-700 text-white p-3 border border-red-800 rounded-lg">
-				</form>
-				@endif
+			<form action="{{ route('logout') }}" method="POST">
+				@csrf
+				<input type="submit" value="Logout" class="bg-red-700 text-white p-3 border border-red-800 rounded-lg">
+			</form>
          @endguest
 		</div>
 	</nav>

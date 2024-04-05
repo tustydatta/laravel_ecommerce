@@ -3,27 +3,24 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File; 
-use App\Models\Item;
 use App\Models\Category;
+use Illuminate\Support\Facades\File; 
+use Illuminate\Http\Request;
 
-
-class ItemController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {   
-        $items = Item::all();
-        return view('backend.items.index', compact('items'));
+        $category = Category::all();
+        return view('backend.category.index', compact('category'));
     }
 
     public function create()
     {
-        $category = Category::all();
-        return view('backend.items.create', compact('category'));
+        return view('backend.category.create');
     }
 
     /**
@@ -33,7 +30,8 @@ class ItemController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'price' => 'required',
+            'slug' => 'required',
+            'is_active' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $item_data = $request->all();
@@ -41,11 +39,11 @@ class ItemController extends Controller
         $imageName = time().'.'.$request->image->extension();
         $item_data['image'] = $imageName; 
        
-        $request->image->move(public_path('images/items'), $imageName);
+        $request->image->move(public_path('images/category'), $imageName);
 
-        Item::create($item_data);
-        return redirect()->route('items.index')
-                    ->with('success', 'Items now added');
+        Category::create($item_data);
+        return redirect()->route('category.index')
+                    ->with('success', 'category now added');
     }
 
     /**
@@ -58,8 +56,8 @@ class ItemController extends Controller
 
     public function edit(string $id)
     {
-        $items = Item::find($id);
-        return view('backend.items.edit', compact('items'));
+        $category = Category::find($id);
+        return view('backend.category.edit', compact('category'));
     }
 
     /**
@@ -67,11 +65,12 @@ class ItemController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $items = Item::find($id);
+        $category = Category::find($id);
 
         $request->validate([
             'name' => 'required',
-            'price' => 'required',
+            'slug' => 'required',
+            'is_active' => 'required',
         ]);
 
         $item_data = $request->all();
@@ -80,23 +79,23 @@ class ItemController extends Controller
         {
             //if image given on file
             $request->validate([
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image' => 'required|image|mimes:jpeg,webp,png,jpg,gif,svg|max:2048',
             ]);
 
             // old image delete
-            File::delete('images/items/'.$items->image);
+            File::delete('images/category/'.$category->image);
             
             $imageName = time().'.'.$request->image->extension();
             $item_data['image'] = $imageName; 
             
             //new image upload
-            $request->image->move(public_path('images/items'), $imageName);
+            $request->image->move(public_path('images/category'), $imageName);
         }
 
-        $items->update($item_data);
+        $category->update($item_data);
 
-        return redirect()->route('items.index')
-                ->with('success', 'Items update');
+        return redirect()->route('category.index')
+                ->with('success', 'category update');
     }
 
     /**
@@ -104,10 +103,11 @@ class ItemController extends Controller
      */
     public function destroy(string $id)
     {
-        $items = Item::find($id);
-        File::delete('images/items/'.$items->image);
-        $items->delete();
-        return redirect()->route('items.index')
-                    ->with('success', 'Item delete');
+        $category = Category::find($id);
+        File::delete('images/category/'.$category->image);
+        $category->delete();
+        return redirect()->route('category.index')
+                    ->with('success', 'Category delete');
     }
+
 }

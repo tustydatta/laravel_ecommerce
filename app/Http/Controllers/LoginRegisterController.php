@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,29 @@ class LoginRegisterController extends Controller
     public function adminLogin()
     {
         return view('backend.admin_login');
+    }
+
+    public function adminAuthenticate(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        $admin_info = Admin::where($credentials)->first();
+     
+        if(isset($admin_info->name)) {
+            $request->session()->put('admin_user_name', $admin_info->name);
+            return redirect()->route('admin.dashboard');
+        }
+        return back()->withErrors(['email' => 'You provided credentials do not match in our records.',])->onlyInput('email');
+    }
+
+    public function adminLogout(Request $request)
+    {
+        $request->session()->put('admin_user_name', '');
+        return redirect()->route('admin_login')
+                    ->withSuccess('You have logged out suucessfully!');
     }
 
     public function register()
@@ -61,7 +85,6 @@ class LoginRegisterController extends Controller
 
     public function authenticate(Request $request)
     {
-
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required'
@@ -70,18 +93,7 @@ class LoginRegisterController extends Controller
         if(Auth::attempt($credentials))
         {
             $request->session()->regenerate();
-
-            $logged_user = User::find(Auth::id());
-
-            $request->session()->put('is_admin', $logged_user->is_admin);
-
-            if ($logged_user->is_admin == 1) {
-                // for admin
-                return redirect()->route('admin.dashboard');
-            } else {
-                // for user
-                return redirect()->route('home');
-            }
+            return redirect()->route('home');
         }
         return back()->withErrors(['email' => 'You provided credentials do not match in our records.',])->onlyInput('email');
     }

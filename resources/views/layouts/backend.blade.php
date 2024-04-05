@@ -20,23 +20,40 @@
 		</a>
 		<h1 class="mt-4 mr-4 text-5xl">Rokomari</h1>
 
-		<form action="{{ route('logout') }}" method="POST">
+		<form action="{{ route('adminLogout') }}" method="POST">
 			@csrf
-			<input type="submit" value="Logout" class="bg-red-700 text-white p-3 border border-red-800 rounded-lg">
+			<input type="submit" value="Logout" class="bg-red-700 text-white p-3 mt-5 border border-red-800 rounded-lg">
 		</form>
 	</nav>
 
 
-		<div class="min-h-screen bg-[url({{ asset('images/grocery1.jpg')}})] bg-center bg-cover bg-slate-700/75 bg-blend-darken">
+	<div class="min-h-screen bg-[url({{ asset('images/bg2.webp')}})] bg-center bg-cover bg-slate-700/75 bg-blend-darken">
 
-		<div class="backdrop-blur-sm px-14">
-            <div class="my-6">
-                @yield('content')
-            </div>
+		<div class="backdrop-blur-sm">
+			
+			<div class="flex flex-row">
+				<ul class="min-h-screen w-1/5 bg-slate-800">
+					<li class="mb-1 p-3 hover:bg-slate-600">
+						<a href="{{ route('admin.dashboard') }}">Dashboard</a>
+					</li>
+
+					<li class="mb-1 p-3 hover:bg-slate-600">
+						<a href="{{ route('category.index') }}">Product Category</a>
+					</li>
+
+					<li class="mb-1 p-3 hover:bg-slate-600">
+						<a href="{{ route('items.index') }}">Products</a>
+					</li>
+				</ul>
+				<div class="min-h-screen w-4/5 border border-black">
+					@yield('content')
+				</div>
+				
+			</div>
 	 	</div>
 	</div>
 
-	<footer class="bg-slate-800">
+	<footer class="bg-slate-800 border border-gray-300">
 		<div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
 			<div class="md:flex md:justify-between">
 				<div class="mb-6 md:mb-0">
@@ -95,13 +112,6 @@
 	</footer>
 
 	<div>
-		<div class="bg-slate-800 h-40">
-			<div class="container mx-auto p-6">
-				<h1 class="text-xl text-orange-400">CONTACT US</h1>
-				<p>Phone: 01864-903688</p>
-				<p>E-mail: tustydatta@gamil.com</p>
-			</div>
-		</div>
 		<div class="bg-black h-14 text-center mt-2 text-xl">
 			<i class="fa-brands fa-facebook m-4"></i>
 			<i class="fa-brands fa-twitter m-4"></i>

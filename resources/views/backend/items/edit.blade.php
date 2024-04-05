@@ -1,7 +1,9 @@
-@extends('layouts.frontend')
+@extends('layouts.backend')
 
 @section('content')
-<div class="border border-white text-center py-6">
+<h1 class="text-center text-3xl mt-12">Products</h1>
+<div class="bg-orange-400 h-1 w-20 mx-auto mt-1"></div>
+<div class="border border-white text-center py-6 m-8">
     <form action="{{ route('items.update', $items->id) }}" method="post" enctype = "multipart/form-data">
         <h1 class="mb-4 text-2xl text-orange-400">Change the item</h1>
 
