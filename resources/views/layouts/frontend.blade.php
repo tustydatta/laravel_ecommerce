@@ -12,17 +12,15 @@
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css">
     <!-- alpine js -->
 	<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+	<script src="{{ asset('js/custom.js') }}"></script>
 </head>
-<body class="">
+<body class="" x-data="{ cart_count: 0 }">
 <div class="bg-black text-white">
 	<nav class="container mx-auto text-center flex flex-row justify-between md:h-24 ">
 		<a href="http://127.0.0.1:8000">	
 			<img src="{{ URL::to('/') }}/images/logo.png" class="h-16 w-24 md:mt-4 m-14">
 		</a>
-		@guest
-		<h1 class="mt-4 text-5xl">Rokomari</h1>
 		
-		@else
 		<ul class="md:flex md:flex-row mt-8 mr-4 text-xl">
 			<li><a href="{{ route('home') }}" class="mx-8">Home</a></li>
 			<li class="group relative cursor-pointer">
@@ -49,23 +47,31 @@
 			<li><a href="#" class="mx-8">About</a></li>
 			<li><a href="#" class="mx-8">Contact</a></li>
 		</ul>
-    	@endguest
+		
+		<div class="mt-8 flex flex-row">
 
-		<div class="h-14 text-center mt-6 text-2xl">
-			<i class="fa-solid fa-cart-shopping m-3"></i>
-			<i class="fa-solid fa-hand-holding-heart m-3"></i>
-		</div>
+			<i class="fa-solid fa-cart-shopping p-4 fa-lg relative">
+				<span class="absolute right-0 top-0 rounded-full bg-red-600 w-4 h-4 top right p-0 m-0 text-white font-mono text-sm  leading-tight text-center"
+					x-text="cart_count"
+				>
+				</span>
+			</i>
+			<i class="fa-solid fa-hand-holding-heart mr-2 py-4 px-3 fa-lg relative">
+				<span class="absolute right-0 top-0 rounded-full bg-red-600 w-4 h-4 top right p-0 m-0 text-white font-mono text-sm  leading-tight text-center">5
+				</span>
+			</i>
 
-		<div class="mt-8">
-         @guest
-				<a href="{{ route('login') }}" class="bg-sky-700 text-white p-3 border border-sky-800 rounded-lg">Login</a>
-				<a href="{{ route('register') }}" class="bg-green-700 text-white p-3 border border-green-800 rounded-lg">Register</a>
-         @else
-			<form action="{{ route('logout') }}" method="POST">
-				@csrf
-				<input type="submit" value="Logout" class="bg-red-700 text-white p-3 border border-red-800 rounded-lg">
-			</form>
-         @endguest
+			<div>
+				@guest
+					<a href="{{ route('login') }}" class="bg-sky-700 text-white p-2 border border-sky-800 rounded-lg">Login</a>
+					<a href="{{ route('register') }}" class="bg-green-700 text-white p-2 border border-green-800 rounded-lg">Register</a>
+				@else
+					<form action="{{ route('logout') }}" method="POST">
+						@csrf
+						<input type="submit" value="Logout" class="bg-red-700 text-white px-2 py-1 border border-red-800 rounded-lg">
+					</form>
+				@endguest
+			</div>
 		</div>
 	</nav>
 

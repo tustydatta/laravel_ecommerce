@@ -9,6 +9,7 @@ use App\Http\Controllers\frontend\WelcomeController;
 
 Route::controller(WelcomeController::class)->group(function(){
     Route::get('/', 'home')->name('home');
+    Route::get('/test/{product_id}', 'test')->name('test');
     Route::get('/all_category', 'allCategory')->name('all_category');
     Route::get('/category/{category_id}', 'Category')->name('category');
     Route::get('/product/{product_id}', 'Product')->name('product');

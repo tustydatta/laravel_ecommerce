@@ -8,6 +8,36 @@ use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
 {
+
+    
+    public function test(Request $request, $product_id)
+    {   
+        // $request->session()->forget('product_ids');
+        // $request->session()->flush();
+        // exit();
+
+        if($request->session()->has('product'))
+        {
+
+            $request->session()->push('product.id', $product_id);
+            
+            
+
+            
+        }
+        else {
+            $request->session()->put('product.id', []);
+            $request->session()->push('product.id', $product_id);
+            
+        }
+
+        $new_product_ids = $request->session()->get('product');
+            dd($new_product_ids);
+
+        // $request->session()->put('product_ids', 3);
+        // return true;
+    }
+
     public function home()
     {   
         $items = Item::all();

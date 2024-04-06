@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -40,7 +41,8 @@ class LoginRegisterController extends Controller
 
     public function register()
     {
-        return view('frontend.auth.register');
+        $menuCategory = Category::all();
+        return view('frontend.auth.register', compact('menuCategory'));
     }
 
     public function store(Request $request)
@@ -80,7 +82,8 @@ class LoginRegisterController extends Controller
 
     public function login()
     {
-        return view('frontend.auth.login');
+        $menuCategory = Category::all();
+        return view('frontend.auth.login', compact('menuCategory'));
     }
 
     public function authenticate(Request $request)
