@@ -23,6 +23,7 @@
                 <tr class="border-b border-white text-xl text-orange-400">
                     <th class="py-4 ">Id</th>
                     <th>Name</th>
+                    <th>Category</th>
                     <th>Image</th>
                     <th>price</th>
                     <th>Action</th>
@@ -34,6 +35,7 @@
                 <tr class="border-b border-white">
                     <td class="py-4">{{ $i++ }}</td>
                     <td>{{ $item->name }}</td>
+                    <td>{{ $item->category->name }}</td>
                     <td>
                         <img src="{{ asset('images/items/'.$item->image) }}" alt="" class="h-16 w-20 mx-auto">
                     </td>

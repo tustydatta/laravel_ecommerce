@@ -32,7 +32,7 @@ class CategoryController extends Controller
             'name' => 'required',
             'slug' => 'required',
             'is_active' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,webp,png,jpg,gif,svg|max:2048',
         ]);
         $item_data = $request->all();
        

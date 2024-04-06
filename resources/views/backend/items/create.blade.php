@@ -1,6 +1,17 @@
 @extends('layouts.backend')
 
 @section('content')
+
+@if(session('success'))
+    <div x-data="{ open: true }">
+        <div class="w-ful bg-green-400 px-6 py-5 flex flex-row justify-between" 
+        x-show="open">
+            <p>{{ session('success') }}</p>
+            <i class="fa fa-close text-lg" x-on:click="open =! open"></i>
+        </div>
+    </div>
+@endif
+
 <h1 class="text-center text-3xl mt-12">Products</h1>
 <div class="bg-orange-400 h-1 w-20 mx-auto mt-1"></div>
 <div class="border border-white text-center py-6 m-8">
@@ -17,7 +28,7 @@
 
         <div class="w-full mb-4">
             <label class="text-xl">Category</label>
-            <select name="is_active" class="bg-gray-50  w-2/4 ml-4 p-2 text-black rounded-lg">
+            <select name="category_id" class="bg-gray-50  w-2/4 ml-4 p-2 text-black rounded-lg">
                 @forelse($category as $cat)
                     <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                 @empty

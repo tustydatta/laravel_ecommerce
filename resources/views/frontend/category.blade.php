@@ -2,8 +2,6 @@
 @section('content')
 
 <div class="container mx-auto">
-    @forelse($menuCategory as $cat)
-
 
     <h1 class="text-6xl pt-10 leading-tight text-orange-400">{{ $cat->name }}</h1>
 	<p class="text-xl leading-10 text-justify my-2">Grocify offer a wide range of products, including fresh products, meats, dairy,  meats, dairy, baked goods and non-perishable items.</p>
@@ -12,7 +10,7 @@
         @forelse($items as $item)
         @if($cat->id == $item->category_id)
         <div class="w-full h-auto border border-sm border-white rounded-lg border-rounded-lg backdrop-blur-3xl">
-            <a href="#">
+            <a href="{{ route('product', $item->id) }}">
                 <div>
                     <img src="{{ asset('images/items/'.$item->image) }}" alt="" class="h-44 w-80 rounded-t-lg">
                 </div>
@@ -36,10 +34,5 @@
 
     </div>
 
-    @empty
-        <div>
-            <p>No category found</p>
-        </div>
-    @endforelse
 </div>
 @endsection

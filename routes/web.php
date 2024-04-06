@@ -8,7 +8,10 @@ use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\frontend\WelcomeController;
 
 Route::controller(WelcomeController::class)->group(function(){
-    Route::get('/home', 'home')->name('home');
+    Route::get('/', 'home')->name('home');
+    Route::get('/all_category', 'allCategory')->name('all_category');
+    Route::get('/category/{category_id}', 'Category')->name('category');
+    Route::get('/product/{product_id}', 'Product')->name('product');
 });
 
 Route::controller(DashboardController::class)->group(function(){
@@ -38,7 +41,7 @@ Route::controller(LoginRegisterController::class)->group(function(){
     Route::post('/adminAuthenticate', 'adminAuthenticate')->name('admin_authenticate');
     Route::post('/adminLogout', 'adminLogout')->name('adminLogout');
 
-    Route::get('/', 'register')->name('register');
+    Route::get('/register', 'register')->name('register');
     Route::post('/store', 'store')->name('store');
     Route::get('/dashboard', 'dashboard')->name('dashboard');
     Route::get('/login', 'login')->name('login');

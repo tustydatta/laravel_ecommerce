@@ -16,6 +16,9 @@ class ItemController extends Controller
      */
     public function index()
     {   
+        // $phone = Item::find(1)->category;
+        // dd($phone->name); exit();
+        
         $items = Item::all();
         return view('backend.items.index', compact('items'));
     }
@@ -33,8 +36,9 @@ class ItemController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'category_id' => 'required',
             'price' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,webp,png,jpg,gif,svg|max:2048',
         ]);
         $item_data = $request->all();
        
@@ -59,7 +63,8 @@ class ItemController extends Controller
     public function edit(string $id)
     {
         $items = Item::find($id);
-        return view('backend.items.edit', compact('items'));
+        $category = Category::all();
+        return view('backend.items.edit', compact('items', 'category'));
     }
 
     /**
@@ -80,7 +85,7 @@ class ItemController extends Controller
         {
             //if image given on file
             $request->validate([
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image' => 'required|image|mimes:jpeg,webp,png,jpg,gif,svg|max:2048',
             ]);
 
             // old image delete
