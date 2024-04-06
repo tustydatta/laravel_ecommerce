@@ -8,8 +8,11 @@ use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\frontend\WelcomeController;
 
 Route::controller(WelcomeController::class)->group(function(){
-    Route::get('/', 'home')->name('home');
     Route::get('/test/{product_id}', 'test')->name('test');
+    Route::get('/test1/{product_id}', 'test1')->name('test1');
+    Route::get('/test2/{product_id}', 'test2')->name('test2');
+
+    Route::get('/', 'home')->name('home');
     Route::get('/all_category', 'allCategory')->name('all_category');
     Route::get('/category/{category_id}', 'Category')->name('category');
     Route::get('/product/{product_id}', 'Product')->name('product');
