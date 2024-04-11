@@ -1,6 +1,6 @@
 @extends('layouts.frontend')
 @section('content')
-<div class="border border-white text-center py-6">
+<div class="border border-white text-center py-6 my-14">
     <h3 class="mb-4 text-4xl text-orange-400">Login</h3>
     <form action="{{ route('authenticate') }}" method="post">
         @csrf

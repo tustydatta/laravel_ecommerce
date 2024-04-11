@@ -4,7 +4,7 @@
 <div class="container mx-auto">
     @forelse($menuCategory as $cat)
 
-    <a href="{{ route('category', $cat->id) }}">
+    <a href="{{ route('category_product', $cat->id) }}">
         <div class="shadow-2xl px-8 py-4">
             <h1 class="text-6xl pt-4 leading-tight text-orange-400">{{ $cat->name }}</h1>
             <img src="{{ asset('images/category/'.$cat->image) }}" alt="not" class="h-auto w-3/4">

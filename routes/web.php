@@ -9,13 +9,23 @@ use App\Http\Controllers\frontend\WelcomeController;
 
 Route::controller(WelcomeController::class)->group(function(){
     Route::get('/test/{product_id}', 'test')->name('test');
-    Route::get('/test1/{product_id}', 'test1')->name('test1');
-    Route::get('/test2/{product_id}', 'test2')->name('test2');
 
     Route::get('/', 'home')->name('home');
     Route::get('/all_category', 'allCategory')->name('all_category');
-    Route::get('/category/{category_id}', 'Category')->name('category');
+    Route::get('/category_products/{category_id}', 'Category')->name('category_product');
     Route::get('/product/{product_id}', 'Product')->name('product');
+    Route::get('/cart', 'Cart')->name('cart');
+    Route::get('/cart_add/{product_id}', 'CartAdd')->name('cart_add');
+    Route::get('/cart_count', 'CartCount');
+    Route::get('/checkout', 'Checkout')->name('checkout');
+    Route::get('/checkoutproductlist/{id}', 'checkoutProductList');
+
+
+    Route::get('/single_checkout/{product_id}', 'SingleCheckout')->name('single_checkout');
+    Route::get('/wish', 'Wish')->name('wish');
+    Route::get('/wish_add/{product_id}', 'WishAdd')->name('wish_add');
+    Route::get('/wish_count', 'WishCount');
+    Route::get('/wish_checkout/{product_id}', 'WishCheckOut')->name('wish_checkout');
 });
 
 Route::controller(DashboardController::class)->group(function(){

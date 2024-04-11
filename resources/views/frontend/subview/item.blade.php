@@ -11,11 +11,33 @@
             <p> {{ $item->price }} tk/-</p>
         </div>
     </a>
-    <button class="w-full py-3  bg-purple-700 hover:bg-purple-500" 
-        @click="cart_count++"
-        onClick="this.disabled=true;"
-    >
-        Add to cart
-    </button>
-    <button class="w-full py-3  bg-green-800 hover:bg-green-600  rounded-b-lg" onclick="abc({{ $item->id }})">Add to Wishlist</button>
+
+    @php
+        $cart_ids = session('cart_ids');
+    @endphp
+    @if(!empty($cart_ids))
+        @if(in_array($item->id, $cart_ids))
+            <div class="w-full py-3 text-center bg-gray-500">Cart added</div>
+        @else
+            @include('frontend.subview.item_cart_btn')
+        @endif
+    @else
+        @include('frontend.subview.item_cart_btn')
+    @endif
+        
+    @php
+        $wish_ids = session('wish_ids');
+    @endphp
+
+    @if(!empty($wish_ids))
+        @if(in_array($item->id, $wish_ids))
+            <div class="w-full py-3  bg-stone-800  text-center rounded-b-lg">Wish Added</div>
+        @else
+            @include('frontend.subview.item_wish_btn')
+        @endif
+    @else
+        @include('frontend.subview.item_wish_btn')
+    @endif
+
+    
 </div>

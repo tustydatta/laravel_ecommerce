@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 @section('content')
 
-<div class="border border-white text-center py-6">
+<div class="border border-white text-center py-6 my-12">
     <h3 class="mb-4 text-4xl text-orange-400">Register</h3>
     <form action="{{ route('store') }}" method="post" >
         @csrf
